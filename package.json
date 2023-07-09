@@ -1,0 +1,11 @@
+{
+  "name": "task-management-basic",
+  "version": "1.0.0",
+  "description": "Simple Task Management Tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "run test"
+  },
+  "author": "hoquocvung",
+  "license": "MIT"
+}
