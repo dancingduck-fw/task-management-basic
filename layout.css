@@ -1,0 +1,111 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.container{
+    background-image: url(img/bg2.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    padding: 20px 20px;
+}
+p, h3, h2{
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Mulish', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Press Start 2P', cursive;
+    font-family: 'Roboto', sans-serif;
+}
+.container .header{
+    width: 90%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px auto;
+}
+.container .header .header_left h2,p{
+    color: #F0EEE9;
+    margin-bottom: 5px;
+}
+.container .header .header_right ul{
+    display: flex;
+    list-style: none;
+}
+.container .header .header_right ul li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 20px;
+    background-color: #D0CFD4;
+    width: 30px;
+    height: 30px;
+    border-radius: 10%;
+}
+.fa{
+    font-size: 18px;
+    opacity: 0.5;
+}
+
+.container .main {
+    width: 90%;
+    height: 75vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.active {
+    display: none;
+}
+.container .main .alert{
+    text-align: center;
+    width: 430px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 30px 10px;
+    margin-top: 100px;
+    background-color: #6c9177;
+}
+.container .main .alert img{
+    width: 90px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    transform: rotate(20deg);
+}
+.container .main .alert h3{
+    margin-bottom: 10px;
+    color: #F0EEE9;
+}
+.container .main .alert p{
+    opacity: 0.7;
+}
+.container .add_list{
+    display: flex;
+    align-items: center;
+    background-color: #D0CFD4;
+    width: 90%;
+    height: 45px;
+    padding-left: 20px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.fa-plus{
+    font-size: 26px;
+    font-weight: 800;
+}
+.container .add_list input{
+    width: 100%;
+    height: 100%;
+    background-color: #D0CFD4;
+    border: none;
+    padding-left: 20px;
+    outline: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
