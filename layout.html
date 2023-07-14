@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To Do List</title>
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Kanit:wght@300&family=Mulish:wght@500&family=Noto+Sans:wght@300&family=Press+Start+2P&family=Roboto:ital,wght@1,300;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header_left">
+                <h1>My Day</h1>
+                <p id="real_time"></p>
+            </div>
+            <div class="header_right">
+                <ul>
+                    <li><i class="fa fa-thin fa-right-to-bracket"></i></li>
+                    <li><i class="fa fa-thin fa-lightbulb"></i></li>
+                    <li><i class="fa fa-solid fa-ellipsis-vertical"></i></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main">
+            <div class="list">
+                <ul id="u_list">
+                    <!-- <li id="1"><input class="tick" type="checkbox">1Wake up<i class="fa-light fa-star"></i></li> -->
+                </ul>
+                <hr class="active hr">
+                <ul id="done_list">
+                </ul>
+            </div>
+            <div class="active alert">
+                <img src="img/note.jpg" alt="...">
+                <h3>Wondering where your tasks are?</h3>
+                <p>Any tasks you didn't complete in My <br>Day last time 
+                    show up in the<br> suggestions pane.</p>
+            </div>
+        </div>
+        <div class="footer">
+            <form onsubmit="addNewList(event)" class="add_list">
+                <i class="fa-light fa-plus"></i>
+                <input id="ipt_addList" type="text" placeholder="Add a task...">
+            </form>
+        </div>
+    </div>
+    <script src="layout.js"></script>
+</body>
+</html>
