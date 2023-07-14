@@ -7,5 +7,8 @@
     "test": "run test"
   },
   "author": "hoquocvung",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.29.4"
+  }
 }
