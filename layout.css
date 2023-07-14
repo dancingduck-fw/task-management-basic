@@ -12,7 +12,7 @@
     height: 100vh;
     padding: 20px 20px;
 }
-p, h3, h2{
+p, h1, h2{
     font-family: 'Dancing Script', cursive;
     font-family: 'Kanit', sans-serif;
     font-family: 'Mulish', sans-serif;
@@ -22,13 +22,13 @@ p, h3, h2{
 }
 .container .header{
     width: 90%;
-    height: 70px;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0px auto;
 }
-.container .header .header_left h2,p{
+.container .header .header_left h1,p{
     color: #F0EEE9;
     margin-bottom: 5px;
 }
@@ -47,21 +47,68 @@ p, h3, h2{
     height: 30px;
     border-radius: 10%;
 }
-.fa{
-    font-size: 18px;
-    opacity: 0.5;
-}
-
 .container .main {
     width: 90%;
-    height: 75vh;
-    margin: 0 auto;
+    height: 70vh;
+    margin: 15px auto;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
 }
 .active {
     display: none;
+}
+.complete {
+    text-decoration: line-through;
+}
+.container .main .list{
+    width: 100%;
+    height: 75vh;
+}
+.container .main .list #u_list li{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    height: 50px;
+    background-color: #93a398;
+    margin-bottom: 7px;
+    border-radius: 5px;
+    font-size: 22px;
+    color: #dfb8c7;
+    position: relative;
+
+}
+.container .main .list #u_list li input{
+    width: 8%;
+    cursor: pointer;
+}
+.fa-star {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}
+.liked {
+    color: yellow;
+}
+.hr{
+    margin: 15px 0px;
+    height: 5px;
+}
+.container .main .list #done_list li{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    height: 50px;
+    background-color: #dfb8c7;
+    margin-bottom: 7px;
+    border-radius: 5px;
+    font-size: 22px;
+    color: #7fa086;
+}
+.container .main .list #done_list li input{
+    width: 10%;
+    cursor: pointer;
 }
 .container .main .alert{
     text-align: center;
@@ -85,23 +132,26 @@ p, h3, h2{
 .container .main .alert p{
     opacity: 0.7;
 }
-.container .add_list{
+.container .footer{
+    width: 90%;
+    height: 10vh;
+    margin: 0 auto;
+}
+.container .footer .add_list{
     display: flex;
     align-items: center;
     background-color: #D0CFD4;
-    width: 90%;
-    height: 45px;
+    height: 50px;
     padding-left: 20px;
     border-radius: 5px;
-    margin: 0 auto;
 }
 .fa-plus{
-    font-size: 26px;
+    font-size: 29px;
     font-weight: 800;
 }
 .container .add_list input{
     width: 100%;
-    height: 100%;
+    height: 50px;
     background-color: #D0CFD4;
     border: none;
     padding-left: 20px;
