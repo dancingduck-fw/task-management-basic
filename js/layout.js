@@ -6,12 +6,12 @@ const dayString = currentDate.toFormat('cccc, LLL dd');
 document.getElementById("real_time").innerHTML = dayString;
 
 let doList = [
-    { id: 1, content: "1. Wake up" },
-    { id: 2, content: "2. Gym" },
-    { id: 3, content: "3. Have breakfast" },
-    { id: 4, content: "4. Drink coffee" },
-    { id: 5, content: "5. Takw a nap" },
-    { id: 6, content: "6. Finish work" }
+    { id: 1, content: "Wake up", isLiked: true },
+    { id: 2, content: "Gym", isLiked: false },
+    { id: 3, content: "Have breakfast",isLiked: true },
+    { id: 4, content: "Drink coffee",isLiked: false },
+    { id: 5, content: "take a nap",isLiked: true },
+    { id: 6, content: "Finish work",isLiked: false }
 ];
 
 let no =0;
@@ -22,13 +22,14 @@ function addNewList(event) {
     const maxID = Math.max(...doList.map(item => item.id));
     doList.push({
         id: maxID + 1,
-        content: ipt_addList.value
+        content: ipt_addList.value,
+        isLiked: false
     });
-    console.log(doList);
     u_list.innerHTML="";
     displayDoList();
 }
 displayDoList();
+displayDoneList();
 function displayDoList() {
     doList = sortList(doList);
     for(let x of doList) {
@@ -47,6 +48,11 @@ function displayDoList() {
         let star = document.createElement("i");
         star.setAttribute("class", "fa fa-light fa-star");
         star.addEventListener("click", favorite);
+        if(x.isLiked==true) {
+            star.classList.add("liked")
+        } else {
+            star.classList.remove("liked")
+        }
 
         li.appendChild(star);
         u_list.appendChild(li);
@@ -54,10 +60,11 @@ function displayDoList() {
     }
 }
 function complete() {
-    doneList = [...doneList, {id: this.parentElement.id, content: this.parentElement.textContent}]
+    doneList = [...doneList, doList.find(x => x.id == this.parentElement.id)]
     doneList = sortList(doneList);
 
-    doList = doList.filter(x => x.id !== this.parentElement.id);
+    doList = doList.filter(x => x.id != this.parentElement.id);
+
     document.querySelector(".hr").classList.remove("active");
     done_list.innerHTML="";
     displayDoneList();
@@ -69,22 +76,32 @@ function displayDoneList() {
         input2.setAttribute("checked", "checked")
         input2.addEventListener("click",unComplete);
 
+        let star = document.createElement("i");
+        star.setAttribute("class", "fa fa-light fa-star");
+        star.addEventListener("click", favorite);
+        if(x.isLiked==true) {
+            star.classList.add("liked")
+        } else {
+            star.classList.remove("liked")
+        }
+
         let li = document.createElement("li");
         li.setAttribute("id", x.id);
         li.classList.add("complete");
         li.appendChild(input2);
         li.append(x.content);
+        li.appendChild(star);
         done_list.appendChild(li);
         u_list.innerHTML="";
         displayDoList();
     }
 }
 function unComplete(){
-
-    doList=[...doList, {id: this.parentElement.id, content: this.parentElement.textContent}];
-    doList = sortList(doList);
+    doList=[...doList, doneList.find(x => x.id == this.parentElement.id)];
     doneList = doneList.filter(x=>x.id!=this.parentElement.id);
-
+    
+    doList = sortList(doList);
+    
     if(doneList.length == 0) {
         document.querySelector(".hr").classList.add("active");
     }
@@ -96,11 +113,6 @@ function unComplete(){
     displayDoneList();
 }
 
-/**
- *
- * @param {Array} list
- * @returns {*}
- */
 function sortList(list) {
     return list.sort((a,b) => a.id - b.id);
 }
@@ -108,6 +120,13 @@ function favorite() {
     for(let x of doList) {
         if(x.id == this.parentElement.id){
             this.classList.toggle("liked");
+            x.isLiked = !x.isLiked;
+        }
+    }
+    for(let x of doneList) {
+        if(x.id == this.parentElement.id){
+            this.classList.toggle("liked");
+            x.isLiked = !x.isLiked;
         }
     }
 
