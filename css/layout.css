@@ -46,6 +46,16 @@ p, h1, h2{
     width: 30px;
     height: 30px;
     border-radius: 10%;
+    color: #507057;
+}
+.reset {
+    background-color: #da8c79;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #62f381;
+    font-size: 18px;
 }
 .container .main {
     width: 90%;
@@ -160,4 +170,12 @@ p, h1, h2{
     outline: none;
     border-radius: 5px;
     font-size: 18px;
+}
+.icons {
+    display: flex;
+}
+.icons .fa {
+    margin-right: 10px;
+    color: #507057;
+    cursor: pointer;
 }

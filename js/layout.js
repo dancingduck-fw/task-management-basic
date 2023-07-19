@@ -5,33 +5,36 @@ const currentDate = DateTime.now();
 const dayString = currentDate.toFormat('cccc, LLL dd');
 document.getElementById("real_time").innerHTML = dayString;
 
-let doList = [
-    { id: 1, content: "Wake up", isLiked: true },
-    { id: 2, content: "Gym", isLiked: false },
-    { id: 3, content: "Have breakfast",isLiked: true },
-    { id: 4, content: "Drink coffee",isLiked: false },
-    { id: 5, content: "take a nap",isLiked: true },
-    { id: 6, content: "Finish work",isLiked: false }
-];
 
-let no =0;
+
+let doList = [];
 let doneList = [];
-
+let maxID;
 function addNewList(event) {
     event.preventDefault();
-    const maxID = Math.max(...doList.map(item => item.id));
+    icons.classList.remove("icons");
+    if(doList.length != 0) {
+        maxID = Math.max(...doList.map(item => item.id));
+    } else {
+        maxID = 0;
+    }
+    console.log(maxID);
     doList.push({
         id: maxID + 1,
         content: ipt_addList.value,
         isLiked: false
     });
+    localStorage.setItem('doList_storage', JSON.stringify(doList));
     u_list.innerHTML="";
     displayDoList();
 }
 displayDoList();
 displayDoneList();
+checkLength();
 function displayDoList() {
+    doList = JSON.parse(localStorage.getItem('doList_storage'));
     doList = sortList(doList);
+
     for(let x of doList) {
 
         let li = document.createElement("li");
@@ -61,15 +64,19 @@ function displayDoList() {
 }
 function complete() {
     doneList = [...doneList, doList.find(x => x.id == this.parentElement.id)]
-    doneList = sortList(doneList);
-
+    localStorage.setItem('doneList_storage', JSON.stringify(doneList));
+    
     doList = doList.filter(x => x.id != this.parentElement.id);
+    localStorage.setItem('doList_storage', JSON.stringify(doList));
 
     document.querySelector(".hr").classList.remove("active");
     done_list.innerHTML="";
     displayDoneList();
 }
 function displayDoneList() {
+    doneList = JSON.parse(localStorage.getItem('doneList_storage'));
+    doneList = sortList(doneList);
+    console.log(doneList);
     for(let x of doneList) {
         let input2 = document.createElement("input");
         input2.setAttribute("type", "checkbox")
@@ -98,7 +105,10 @@ function displayDoneList() {
 }
 function unComplete(){
     doList=[...doList, doneList.find(x => x.id == this.parentElement.id)];
+    localStorage.setItem('doList_storage', JSON.stringify(doList));
+
     doneList = doneList.filter(x=>x.id!=this.parentElement.id);
+    localStorage.setItem('doneList_storage', JSON.stringify(doneList));
     
     doList = sortList(doList);
     
@@ -129,5 +139,28 @@ function favorite() {
             x.isLiked = !x.isLiked;
         }
     }
+}
+function moreIcons() {
+    icons.classList.add("icons");
+}
 
+reset.addEventListener("click",clear) 
+function clear() {
+    doList=[];
+    localStorage.setItem('doList_storage', JSON.stringify(doList));
+    u_list.innerHTML="";
+    displayDoList();
+
+    doneList = [];
+    localStorage.setItem('doneList_storage', JSON.stringify(doneList));
+    done_list.innerHTML="";
+    displayDoneList();
+
+    document.querySelector(".hr").classList.add("active");
+
+}
+function checkLength() {
+    if(doneList.length != 0 && doList.length != 0) {
+        document.querySelector(".hr").classList.remove("active");
+    }
 }
