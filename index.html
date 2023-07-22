@@ -20,6 +20,7 @@
         </div>
         <div class="header_right">
             <ul>
+                <button id ="reset" class="reset">Reset</button>
                 <li><i class="fa fa-thin fa-right-to-bracket"></i></li>
                 <li><i class="fa fa-thin fa-lightbulb"></i></li>
                 <li><i class="fa fa-solid fa-ellipsis-vertical"></i></li>
@@ -45,7 +46,13 @@
     <div class="footer">
         <form onsubmit="addNewList(event)" class="add_list">
             <i class="fa-light fa-plus"></i>
-            <input id="ipt_addList" type="text" placeholder="Add a task...">
+            <input oninput="moreIcons()" id="ipt_addList" type="text" placeholder="Add a task...">
+            <div id="icons" class="active ">
+                <i class="fa fa-thin fa-house"></i>
+                <i class="fa fa-thin fa-calendar"></i>
+                <i class="fa fa-thin fa-clock"></i>
+                <i class="fa fa-regular fa-note"></i>
+            </div>
         </form>
     </div>
 </div>

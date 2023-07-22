@@ -46,6 +46,16 @@ p, h1, h2{
     width: 30px;
     height: 30px;
     border-radius: 10%;
+    color: #507057;
+}
+.reset {
+    background-color: #da8c79;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #62f381;
+    font-size: 18px;
 }
 .container .main {
     width: 90%;
@@ -70,11 +80,11 @@ p, h1, h2{
     list-style: none;
     width: 100%;
     height: 50px;
-    background-color: #93a398;
+    background-color: #88bb91;
     margin-bottom: 7px;
     border-radius: 5px;
     font-size: 22px;
-    color: #dfb8c7;
+    color: #850d5d;
     position: relative;
 
 }
@@ -86,9 +96,10 @@ p, h1, h2{
     cursor: pointer;
     position: absolute;
     right: 20px;
+    color: #ffffff;
 }
 .liked {
-    color: yellow;
+    color: rgb(255, 153, 0);
 }
 .hr{
     margin: 15px 0px;
@@ -100,11 +111,12 @@ p, h1, h2{
     list-style: none;
     width: 100%;
     height: 50px;
-    background-color: #dfb8c7;
+    background-color: #aa7d8f;
     margin-bottom: 7px;
     border-radius: 5px;
     font-size: 22px;
-    color: #7fa086;
+    color: #62f381;
+    position: relative;
 }
 .container .main .list #done_list li input{
     width: 10%;
@@ -158,4 +170,12 @@ p, h1, h2{
     outline: none;
     border-radius: 5px;
     font-size: 18px;
+}
+.icons {
+    display: flex;
+}
+.icons .fa {
+    margin-right: 10px;
+    color: #507057;
+    cursor: pointer;
 }

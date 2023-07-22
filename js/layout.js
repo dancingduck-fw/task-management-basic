@@ -5,32 +5,36 @@ const currentDate = DateTime.now();
 const dayString = currentDate.toFormat('cccc, LLL dd');
 document.getElementById("real_time").innerHTML = dayString;
 
-let doList = [
-    { id: 1, content: "1. Wake up" },
-    { id: 2, content: "2. Gym" },
-    { id: 3, content: "3. Have breakfast" },
-    { id: 4, content: "4. Drink coffee" },
-    { id: 5, content: "5. Takw a nap" },
-    { id: 6, content: "6. Finish work" }
-];
 
-let no =0;
+
+let doList = [];
 let doneList = [];
-
+let maxID;
 function addNewList(event) {
     event.preventDefault();
-    const maxID = Math.max(...doList.map(item => item.id));
+    icons.classList.remove("icons");
+    if(doList.length != 0) {
+        maxID = Math.max(...doList.map(item => item.id));
+    } else {
+        maxID = 0;
+    }
+    console.log(maxID);
     doList.push({
         id: maxID + 1,
-        content: ipt_addList.value
+        content: ipt_addList.value,
+        isLiked: false
     });
-    console.log(doList);
+    localStorage.setItem('doList_storage', JSON.stringify(doList));
     u_list.innerHTML="";
     displayDoList();
 }
 displayDoList();
+displayDoneList();
+checkLength();
 function displayDoList() {
+    doList = JSON.parse(localStorage.getItem('doList_storage'));
     doList = sortList(doList);
+
     for(let x of doList) {
 
         let li = document.createElement("li");
@@ -47,6 +51,11 @@ function displayDoList() {
         let star = document.createElement("i");
         star.setAttribute("class", "fa fa-light fa-star");
         star.addEventListener("click", favorite);
+        if(x.isLiked==true) {
+            star.classList.add("liked")
+        } else {
+            star.classList.remove("liked")
+        }
 
         li.appendChild(star);
         u_list.appendChild(li);
@@ -54,37 +63,55 @@ function displayDoList() {
     }
 }
 function complete() {
-    doneList = [...doneList, {id: this.parentElement.id, content: this.parentElement.textContent}]
-    doneList = sortList(doneList);
+    doneList = [...doneList, doList.find(x => x.id == this.parentElement.id)]
+    localStorage.setItem('doneList_storage', JSON.stringify(doneList));
+    
+    doList = doList.filter(x => x.id != this.parentElement.id);
+    localStorage.setItem('doList_storage', JSON.stringify(doList));
 
-    doList = doList.filter(x => x.id !== this.parentElement.id);
     document.querySelector(".hr").classList.remove("active");
     done_list.innerHTML="";
     displayDoneList();
 }
 function displayDoneList() {
+    doneList = JSON.parse(localStorage.getItem('doneList_storage'));
+    doneList = sortList(doneList);
+    console.log(doneList);
     for(let x of doneList) {
         let input2 = document.createElement("input");
         input2.setAttribute("type", "checkbox")
         input2.setAttribute("checked", "checked")
         input2.addEventListener("click",unComplete);
 
+        let star = document.createElement("i");
+        star.setAttribute("class", "fa fa-light fa-star");
+        star.addEventListener("click", favorite);
+        if(x.isLiked==true) {
+            star.classList.add("liked")
+        } else {
+            star.classList.remove("liked")
+        }
+
         let li = document.createElement("li");
         li.setAttribute("id", x.id);
         li.classList.add("complete");
         li.appendChild(input2);
         li.append(x.content);
+        li.appendChild(star);
         done_list.appendChild(li);
         u_list.innerHTML="";
         displayDoList();
     }
 }
 function unComplete(){
+    doList=[...doList, doneList.find(x => x.id == this.parentElement.id)];
+    localStorage.setItem('doList_storage', JSON.stringify(doList));
 
-    doList=[...doList, {id: this.parentElement.id, content: this.parentElement.textContent}];
-    doList = sortList(doList);
     doneList = doneList.filter(x=>x.id!=this.parentElement.id);
-
+    localStorage.setItem('doneList_storage', JSON.stringify(doneList));
+    
+    doList = sortList(doList);
+    
     if(doneList.length == 0) {
         document.querySelector(".hr").classList.add("active");
     }
@@ -96,11 +123,6 @@ function unComplete(){
     displayDoneList();
 }
 
-/**
- *
- * @param {Array} list
- * @returns {*}
- */
 function sortList(list) {
     return list.sort((a,b) => a.id - b.id);
 }
@@ -108,7 +130,37 @@ function favorite() {
     for(let x of doList) {
         if(x.id == this.parentElement.id){
             this.classList.toggle("liked");
+            x.isLiked = !x.isLiked;
         }
     }
+    for(let x of doneList) {
+        if(x.id == this.parentElement.id){
+            this.classList.toggle("liked");
+            x.isLiked = !x.isLiked;
+        }
+    }
+}
+function moreIcons() {
+    icons.classList.add("icons");
+}
 
+reset.addEventListener("click",clear) 
+function clear() {
+    doList=[];
+    localStorage.setItem('doList_storage', JSON.stringify(doList));
+    u_list.innerHTML="";
+    displayDoList();
+
+    doneList = [];
+    localStorage.setItem('doneList_storage', JSON.stringify(doneList));
+    done_list.innerHTML="";
+    displayDoneList();
+
+    document.querySelector(".hr").classList.add("active");
+
+}
+function checkLength() {
+    if(doneList.length != 0 && doList.length != 0) {
+        document.querySelector(".hr").classList.remove("active");
+    }
 }
